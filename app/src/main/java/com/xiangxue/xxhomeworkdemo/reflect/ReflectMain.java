@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 public class ReflectMain {
 
     /**
+     *
      * ThreadLocal 线程隔离
      * 使用情景: 当线程需要操作上一个线程修改的完的数据,为了保证数据的准确性,
      */
