@@ -32,7 +32,6 @@ public class ReflectMain {
 
         TicketsService proxyInstance = (TicketsService) lwbCompany.getProxyInstance();
         proxyInstance.inquire();
-        task.execute();
     }
 }
 
