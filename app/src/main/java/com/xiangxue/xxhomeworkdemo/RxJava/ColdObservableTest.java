@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -43,9 +42,9 @@ public class ColdObservableTest {
         //  2 : 关键点  冷的被观察者,转换成为热的被观察者
 //        ((ConnectableObservable<Long>)observable).connect();
 
-        observable.subscribe(new Consumer<Long>() {
+        observable.subscribe(new io.reactivex.functions.Consumer<Long>() {
             @Override
-            public void accept(Long aLong) throws Throwable {
+            public void accept(Long aLong) throws Exception {
                 System.out.println("consumer1: " + aLong);
             }
         });
