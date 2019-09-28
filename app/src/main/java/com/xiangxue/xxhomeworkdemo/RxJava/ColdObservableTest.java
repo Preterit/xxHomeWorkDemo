@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -35,7 +36,9 @@ public class ColdObservableTest {
                         .take(Integer.MAX_VALUE)
                         .subscribe(emitter::onNext);
             }
-        }).observeOn(Schedulers.newThread())
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 //                .publish()   // 1:调用  .publish() 转 "热" 被观察者
                 ;
 
