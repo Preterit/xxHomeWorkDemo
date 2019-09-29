@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.xiangxue.rx.rx_activity.FilterActivity;
+import com.xiangxue.rx.rx_activity.GetCodeActivity;
+import com.xiangxue.rx.rx_activity.OtherActivity;
 import com.xiangxue.rx.rx_activity.RetrofitLoginActivity;
 import com.xiangxue.rx.rx_activity.RetrofitTestActivity;
 
@@ -15,11 +18,9 @@ public class MainActivity extends AppCompatActivity {
     //字符串组合
     private String[] data = {"retrofit网络测试",
             "注册/登录",
-            "ButtonClicksActivity",
-            "LoginActivity",
-            "RegisterActivity",
+            "GetCodeActivity",
             "FilterActivity",
-            "OpActivity"};
+            "OtherActivity"};
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -50,25 +51,18 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     startActivity(new Intent(MainActivity.this, RetrofitLoginActivity.class));
                     break;
-//                case 2:
-//                    startActivity(new Intent(MainActivity.this, ButtonClicksActivity.class));
-//                    break;
-//                case 3:
-//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                    break;
-//                case 4:
-//                    startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-//                    break;
-//                case 5:
-//                    startActivity(new Intent(MainActivity.this, FilterActivity.class));
-//                    break;
-//                case 6:
-//                    startActivity(new Intent(MainActivity.this, OpActivity.class));
-//                    break;
+                case 2:
+                    startActivity(new Intent(MainActivity.this, GetCodeActivity.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(MainActivity.this, FilterActivity.class));
+                    break;
+                case 4:
+                    startActivity(new Intent(MainActivity.this, OtherActivity.class));
+                    break;
                 default:
                     break;
             }
-
         });
     }
 

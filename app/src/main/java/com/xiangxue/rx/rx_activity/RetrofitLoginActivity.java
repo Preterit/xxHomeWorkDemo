@@ -13,21 +13,20 @@ import com.xiangxue.xxhomeworkdemo.R;
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Guideline;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
+/**
+ * rx 操作符
+ *  多个状态监听,结合操作符
+ */
 public class RetrofitLoginActivity extends AppCompatActivity {
 
     private static final String TAG = "RetrofitLoginActivity";
     @BindView(R.id.button)
     Button button;
-    @BindView(R.id.button2)
-    Button button2;
-    @BindView(R.id.guideline)
-    Guideline guideline;
     @BindView(R.id.et_account)
     EditText etAccount;
     @BindView(R.id.et_pwd)
