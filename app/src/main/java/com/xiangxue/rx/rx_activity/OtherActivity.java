@@ -6,6 +6,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.xiangxue.rx.rx_apiservice.WanAndroidApi;
+import com.xiangxue.util.HttpUtil;
 import com.xiangxue.xxhomeworkdemo.R;
 
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class OtherActivity extends AppCompatActivity {
 
@@ -54,10 +58,13 @@ public class OtherActivity extends AppCompatActivity {
                     flatmap();
                     break;
                 case 2:
+                    concatmap();
                     break;
                 case 3:
+                    buffer();
                     break;
                 case 4:
+                    retry();
                     break;
                 case 5:
                     break;
@@ -84,7 +91,7 @@ public class OtherActivity extends AppCompatActivity {
 
     }
 
-    public void flatmap() {
+    public void flatmap() {   //  并行无序,一般用于输出一个Observable
         Observable.create(emitter -> {
             emitter.onNext(1);
             emitter.onNext(2);
@@ -96,15 +103,44 @@ public class OtherActivity extends AppCompatActivity {
                 // 最终合并，再发送给被观察者
                 list.add(integer + "_flatmap_" + i);
             }
-            return Observable.fromIterable(list);
+            return Observable.fromIterable(list)
+                    .subscribeOn(Schedulers.newThread());
         }).subscribe(s -> Log.e(TAG, s));
     }
 
-    public void concatmap() {
-
+    public void concatmap() {      // concatMap()和flatMap()很像，但串行有序
+        Observable.create(emitter -> {
+            emitter.onNext(1);
+            emitter.onNext(2);
+            emitter.onNext(3);
+        }).concatMap(integer -> {
+            final List<String> list = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                // 通过concatMap中将被观察者生产的事件序列先进行拆分，再将每个事件转换为一个新的发送三个String事件
+                // 最终合并，再发送给被观察者
+                list.add(integer + "_concatmap_" + i);
+            }
+            return Observable.fromIterable(list)
+                    .subscribeOn(Schedulers.newThread());
+        }).subscribe(s -> Log.e(TAG, s));
     }
 
+    // 被观察者 需要发送5个数字
     public void buffer() {
+        Observable.just(1, 2, 3, 4, 5, 6, 7, 8)
+                .buffer(3, 1)  // 设置缓存区大小 &  步长
+                // 缓存区大小 == 每次从被观察者中获取的时间数量
+                // 步长  ==  每次获取新事件的数量
+                .subscribe(
+                        integers -> {
+                            Log.e(TAG, " 缓存区里的事件数量 = " + integers.size());
+                            for (Integer value : integers) {
+                                Log.e(TAG, " 事件 = " + value);
+                            }
+                        },
+                        e -> Log.e(TAG, "对Complete事件作出响应"),
+                        () -> Log.e(TAG, "对Complete事件作出响应")
+                );
 
     }
 
@@ -113,7 +149,19 @@ public class OtherActivity extends AppCompatActivity {
     }
 
     public void retry() {
-
+        int count = 0;
+        WanAndroidApi androidApi = HttpUtil.getOnlineCookieRetrofit().create(WanAndroidApi.class);
+        androidApi.getProject()
+                .retry(throwable -> {
+                    if (count < 4) {
+                        Log.i(TAG, "重试： " + count);
+                        return true;
+                    }
+                    return false;
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(projectBean -> Log.e(TAG, "retry: "));
     }
 
     public void retryWhen() {
