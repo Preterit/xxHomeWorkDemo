@@ -3,6 +3,7 @@ package com.xiangxue.xxhomeworkdemo.io;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Observable;
 
 /**
  * Date:2019-09-17
@@ -30,6 +31,8 @@ public class JavaIO {
         fileOutputStream.flush();
         fileOutputStream.close();
         byteArrayInputStream.close();
+
+
         new String(buffer);
     }
 }

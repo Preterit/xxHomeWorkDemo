@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.xiangxue.rx.bean.ProjectBean;
 import com.xiangxue.rx.rx_apiservice.WanAndroidApi;
 import com.xiangxue.util.HttpUtil;
 import com.xiangxue.xxhomeworkdemo.R;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -164,7 +166,25 @@ public class OtherActivity extends AppCompatActivity {
                 .subscribe(projectBean -> Log.e(TAG, "retry: "));
     }
 
+
+    // 可重复次数
+    int maxConnectCount = 10;
+    //当前已重复次数
+    int currentRetryCount = 0;
+    //重试等待时间
+    int waitRetryTime = 0;
+
     public void retryWhen() {
+
+//        WanAndroidApi wanAndroidApi = HttpUtil.getOnlineCookieRetrofit().create(WanAndroidApi.class);
+//        Observable<ProjectBean> observable = wanAndroidApi.getProject();
+//        // 步骤4 ：发送网络请求 & 通过retryWhen() 进行重试
+//        // 注 ： 主要异常 才会retryWhen() 进行重试
+//        observable.retryWhen(
+//                // 参数 Observable<Throwable> 中泛型 = 上游操作符抛出的异常，可通过该异常条件来判断异常的类型
+//                throwableObservable -> {
+//
+//                }).subscribe();
 
     }
 }
