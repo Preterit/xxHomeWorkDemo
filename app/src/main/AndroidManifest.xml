@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.xiangxue.rx.rx_activity.OtherActivity"></activity>
+        <activity android:name="com.xiangxue.annotation.activity.AnnotationActivity"></activity>
+        <activity android:name="com.xiangxue.rx.rx_activity.OtherActivity" />
         <activity android:name="com.xiangxue.rx.rx_activity.FilterActivity" />
         <activity android:name="com.xiangxue.rx.rx_activity.GetCodeActivity" />
         <activity android:name="com.xiangxue.rx.rx_activity.RetrofitLoginActivity" />

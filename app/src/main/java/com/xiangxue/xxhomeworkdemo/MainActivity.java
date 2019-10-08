@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.xiangxue.annotation.activity.AnnotationActivity;
 import com.xiangxue.rx.rx_activity.FilterActivity;
 import com.xiangxue.rx.rx_activity.GetCodeActivity;
 import com.xiangxue.rx.rx_activity.OtherActivity;
@@ -20,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
             "注册/登录",
             "GetCodeActivity",
             "FilterActivity",
-            "OtherActivity"};
+            "OtherActivity",
+            "注解解析"
+    };
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -59,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 4:
                     startActivity(new Intent(MainActivity.this, OtherActivity.class));
+                    break;
+                case 5:
+                    startActivity(new Intent(MainActivity.this, AnnotationActivity.class));
                     break;
                 default:
                     break;
