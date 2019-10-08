@@ -11,11 +11,12 @@ import com.xiangxue.rx.rx_apiservice.WanAndroidApi;
 import com.xiangxue.util.HttpUtil;
 import com.xiangxue.xxhomeworkdemo.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -69,6 +70,7 @@ public class OtherActivity extends AppCompatActivity {
                     retry();
                     break;
                 case 5:
+                    retryWhen();
                     break;
             }
         });
@@ -176,15 +178,66 @@ public class OtherActivity extends AppCompatActivity {
 
     public void retryWhen() {
 
-//        WanAndroidApi wanAndroidApi = HttpUtil.getOnlineCookieRetrofit().create(WanAndroidApi.class);
-//        Observable<ProjectBean> observable = wanAndroidApi.getProject();
-//        // 步骤4 ：发送网络请求 & 通过retryWhen() 进行重试
-//        // 注 ： 主要异常 才会retryWhen() 进行重试
-//        observable.retryWhen(
-//                // 参数 Observable<Throwable> 中泛型 = 上游操作符抛出的异常，可通过该异常条件来判断异常的类型
-//                throwableObservable -> {
-//
-//                }).subscribe();
+        WanAndroidApi wanAndroidApi = HttpUtil.getOnlineCookieRetrofit().create(WanAndroidApi.class);
+        Observable<ProjectBean> observable = wanAndroidApi.getProject();
+        // 步骤4 ：发送网络请求 & 通过retryWhen() 进行重试
+        // 注 ： 主要异常 才会retryWhen() 进行重试
+        observable.retryWhen(
+                // 参数 Observable<Throwable> 中泛型 = 上游操作符抛出的异常，可通过该异常条件来判断异常的类型
+                throwableObservable -> {
+                    return throwableObservable.flatMap(throwable -> {
 
+                        //输出异常信息
+                        Log.e(TAG, "" + throwable.toString());
+
+                        /**
+                         * 需求1 : 根据异常类型选择是否要重试
+                         * 即 :当发生的异常 = 网络异常 = IO异常 才选择重试
+                         */
+                        if (throwable instanceof IOException) {
+                            /**
+                             * 需求2 :限制重试次数
+                             * 即 : 当已重复次数 < 设置的重复次数, 才选择重试
+                             */
+                            if (currentRetryCount < maxConnectCount) {
+                                // 记录重复次数
+                                currentRetryCount++;
+                                Log.e(TAG, "重复次数 : " + currentRetryCount);
+                                /**
+                                 * 需求 2 : 实现重试
+                                 * 通过放回的Observable发送的事件 = next()事件,从而使得retryWhen() 重新订阅,最终实现重试的功能.
+                                 *
+                                 * 需求 3 : 延时一段时间再重试
+                                 * 采用delay操作符 = 延迟一段时间发送,以实现重试间隔设置
+                                 *
+                                 * 需求 4 : 遇到的异常越多,时间越长
+                                 * 在delay操作符的等待时间设置 = 没重试一次,增多延迟重试时间1s
+                                 */
+
+                                // 设置等待时间
+                                waitRetryTime = 1000 + currentRetryCount * 1000;
+                                Log.e(TAG, "等待时间 = " + waitRetryTime);
+                                return Observable.just(1).delay(waitRetryTime, TimeUnit.MILLISECONDS);
+                            } else {
+                                // 若重试次数 > 设置的重复次数,则不重试
+                                // 通过发送error来停止重试,(可在观察者的onError()中获取信息)
+                                Observable<Object> error = Observable.error(new Throwable("重试次数已超过设置的次数" + currentRetryCount + ", 即 不在重试"));
+                                return error;
+                            }
+                        }
+                        // 若发生的异常不属于I/O异常,则不重试
+                        // 通过返回的ObserVable发送的事件 = Error事件 实现  ( 可在观察者的onError()中获取到信息 )
+                        else {
+                            Observable<Object> error = Observable.error(new Throwable("发生了非网络异常 (非 I/O 异常)"));
+                            return error;
+                        }
+                    });
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        projectBean -> Log.e(TAG, "发送成功")// 接收服务器返回的数据
+                        ,
+                        e -> Log.e(TAG, e.toString()));
     }
 }
