@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.xiangxue.annotation.activity.AnnotationActivity;
+import com.xiangxue.dagger2.Dagger2Activity;
 import com.xiangxue.rx.rx_activity.FilterActivity;
 import com.xiangxue.rx.rx_activity.GetCodeActivity;
 import com.xiangxue.rx.rx_activity.OtherActivity;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             "GetCodeActivity",
             "FilterActivity",
             "OtherActivity",
-            "注解解析"
+            "dagger2"
     };
     private ArrayAdapter<String> adapter;
 
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 5:
                     startActivity(new Intent(MainActivity.this, AnnotationActivity.class));
+                    break;
+                case 6:
+                    startActivity(new Intent(MainActivity.this, Dagger2Activity.class));
                     break;
                 default:
                     break;

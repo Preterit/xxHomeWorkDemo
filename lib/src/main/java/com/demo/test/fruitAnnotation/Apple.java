@@ -11,7 +11,7 @@ public class Apple {
     private String name;
     @FruitColor(fruitColor = FruitColor.Color.RED)
     private String address;
-    @FruitProducerFactory(id = 1,name = "小苹果",address = "北京市")
+    @FruitProducerFactory(id = 1, name = "小苹果", address = "北京市")
     private int producer;
 
     public Apple() {
