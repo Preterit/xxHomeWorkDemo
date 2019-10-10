@@ -8,6 +8,5 @@ import com.demo.mvp_dagger2.base.BaseView;
  * Desc:
  */
 public interface LoginView extends BaseView {
-
     void showMsg(String msg);
 }

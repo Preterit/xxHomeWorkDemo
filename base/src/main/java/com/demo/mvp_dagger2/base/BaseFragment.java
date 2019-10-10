@@ -59,4 +59,6 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract void initData();
 
+    public abstract void initView();
+
 }

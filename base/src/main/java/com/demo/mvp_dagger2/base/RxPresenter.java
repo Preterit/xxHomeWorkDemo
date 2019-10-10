@@ -3,6 +3,9 @@ package com.demo.mvp_dagger2.base;
 import com.demo.mvp_dagger2.network.api.DemoApi;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author :  lwb
@@ -11,6 +14,8 @@ import javax.inject.Inject;
  */
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
+    @Singleton
+    @NonNull
     @Inject
     DemoApi demoApi;
 
@@ -28,11 +33,8 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         }
     }
 
-    public DemoApi getDemoApi() {
-        if (demoApi != null) {
-            return demoApi;
-        }
-        return null;
+    protected DemoApi getDemoApi() {
+        return demoApi;
     }
 
 }

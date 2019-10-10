@@ -1,11 +1,13 @@
 package com.demo.mvp_dagger2.ui.login;
 
+import android.content.Intent;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.mvp_dagger2.R;
 import com.demo.mvp_dagger2.base.BaseMvpActivity;
+import com.demo.mvp_dagger2.ui.register.RegisterActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,5 +38,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     public void showMsg(String msg) {
         Toast.makeText(mApplication, "请求成功", Toast.LENGTH_SHORT).show();
         Log.e(TAG,msg);
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }

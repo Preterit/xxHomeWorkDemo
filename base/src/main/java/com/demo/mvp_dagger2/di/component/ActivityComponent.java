@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.demo.mvp_dagger2.di.module.ActivityModule;
 import com.demo.mvp_dagger2.di.socpe.ActivityScope;
 import com.demo.mvp_dagger2.ui.login.LoginActivity;
+import com.demo.mvp_dagger2.ui.register.RegisterView;
 
 import dagger.Component;
 
@@ -25,5 +26,6 @@ public interface ActivityComponent {
      * inject的参数。。。不能是父类，必须是你注入的那个内
      */
     void inject(LoginActivity activity);
+    void inject(RegisterView activity);
 
 }
