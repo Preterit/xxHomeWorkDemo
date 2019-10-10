@@ -1,0 +1,36 @@
+package com.demo.mvp_dagger2.base;
+
+import android.os.Bundle;
+
+import javax.inject.Inject;
+
+import androidx.annotation.Nullable;
+
+/**
+ * @author :  lwb
+ * Date: 2019/10/10
+ * Desc:
+ */
+public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragment {
+
+    @Inject
+    protected P mPresenter;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ComponentInject();
+        initData();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mPresenter != null) {
+            mPresenter.onDestroy();//释放资源
+        }
+        this.mPresenter = null;
+        super.onDestroy();
+    }
+
+    public abstract void ComponentInject();
+}
