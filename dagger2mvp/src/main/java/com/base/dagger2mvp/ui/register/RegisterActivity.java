@@ -2,7 +2,6 @@ package com.base.dagger2mvp.ui.register;
 
 
 import android.content.Intent;
-import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -91,11 +90,12 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     }
 
     private static boolean isUsrValid(String usr) {
-        return usr.length() == 11;
+        return usr.length() >= 11;
     }
 
     private static boolean isPasswordValid(String pwd, String rePwd) {
-        return pwd.length() >= 6 && TextUtils.equals(pwd, rePwd);
+//        return pwd.length() >= 6 && TextUtils.equals(pwd, rePwd);
+        return true;
     }
 
     @Override

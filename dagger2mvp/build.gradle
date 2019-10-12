@@ -7,6 +7,7 @@ android {
 
 
     defaultConfig {
+        applicationId "com.base.dagger2mvp"
         minSdkVersion 18
         targetSdkVersion 29
         versionCode 1
