@@ -11,8 +11,8 @@ public class BufferedWriteReaderTest {
 
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
-        File srcfile = new File("src/testtxt/BufferedReader.txt");
-        File dstFile = new File("src/testtxt/BufferedWrite.txt");
+        File srcfile = new File("app/src/main/java/com/xiangxue/io/testtxt/BufferedReader.txt");
+        File dstFile = new File("app/src/main/java/com/xiangxue/io/testtxt/BufferedWrite.txt");
 
         BufferedWriter bw = new BufferedWriter(new FileWriter(dstFile));
         BufferedReader br = new BufferedReader(new FileReader(srcfile));

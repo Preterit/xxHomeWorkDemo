@@ -11,8 +11,6 @@ public class InputStreamReaderTest {
 
 	public static void testISRDefaultEncoder(InputStream is){
 		try{
-
-
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
 			String string;
@@ -60,13 +58,13 @@ public class InputStreamReaderTest {
 		//创建过程是否过于麻烦？？？？？
 		testISRDefaultEncoder(
 				new FileInputStream(
-						new File("src/testtxt/OutputStreamWriter.txt")));
+						new File("app/src/main/java/com/xiangxue/io/testtxt/OutputStreamWriter.txt")));
 		testISRGBK(
 				new FileInputStream(
-						new File("src/testtxt/OutputStreamWriter.txt")));
+						new File("app/src/main/java/com/xiangxue/io/testtxt/OutputStreamWriter.txt")));
 		testISRUTF8(
 				new FileInputStream(
-						new File("src/testtxt/OutputStreamWriter.txt")));
+						new File("app/src/main/java/com/xiangxue/io/testtxt/OutputStreamWriter.txt")));
 	}
 
 }

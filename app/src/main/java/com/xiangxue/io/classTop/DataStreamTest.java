@@ -14,14 +14,14 @@ public class DataStreamTest {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
-//		testDataOutPutStream();
+		testDataOutPutStream();
 		testDataInputStreamI();
 	}
 
 	private static void testDataOutPutStream() {
 
 		try {
-			File file = new File("testtxt/tataStreamTest.txt");
+			File file = new File("app/src/main/java/com/xiangxue/io/testtxt/tataStreamTest.txt");
 			if (file.getParentFile() !=null && !file.getParentFile().exists()) {
 				file.getParentFile().mkdirs();
 			}
@@ -54,7 +54,7 @@ public class DataStreamTest {
 
 	private static void testDataInputStreamI() {
 		try {
-			File file = new File("testtxt/tataStreamTest.txt");
+			File file = new File("app/src/main/java/com/xiangxue/io/testtxt/tataStreamTest.txt");
 
 			DataInputStream in = new DataInputStream(
 					new FileInputStream(file));

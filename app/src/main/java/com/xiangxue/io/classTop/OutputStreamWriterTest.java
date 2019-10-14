@@ -16,14 +16,13 @@ public class OutputStreamWriterTest {
 	}
 
 	public static void testOutputStreamWriter() throws IOException {
-		File file = new File("src/testtxt/OutputStreamWriter.txt");
+		File file = new File("app/src/main/java/com/xiangxue/io/testtxt/OutputStreamWriter.txt");
 
 		// true, 设置内容可以追加
 		FileOutputStream fos = new FileOutputStream(file, true);
 		//todo 是否有一个封装好的writer？
 		OutputStreamWriter oswDef = new OutputStreamWriter(fos);
 		BufferedWriter bwdef = new BufferedWriter(oswDef);
-
 		bwdef.write(STRING);
 		bwdef.newLine();
 		bwdef.flush();

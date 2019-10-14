@@ -16,13 +16,13 @@ public class BufferedStreamTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		bufferedOutPutStream();
+//		bufferedOutPutStream();
 		bufferedInputStream();
 	}
 
 	private static void bufferedOutPutStream() {
 		try {
-			File file = new File("src/testtxt/BufferedStreamTest.txt");
+			File file = new File("app/src/main/java/com/xiangxue/io/testtxt/BufferedStreamTest.txt");
 			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 			bos.write(byteArray[0]);
 			bos.write(byteArray, 1, byteArray.length - 1);
@@ -36,11 +36,11 @@ public class BufferedStreamTest {
 
 	private static void bufferedInputStream() {
 		try {
-			File file = new File("src/testtxt/BufferedStreamTest.txt");
+			File file = new File("app/src/main/java/com/xiangxue/io/testtxt/BufferedStreamTest.txt");
 			BufferedInputStream bin = new BufferedInputStream(new FileInputStream(file));
 			for(int i = 0; i < 10; i++) {
 				if (bin.available() >= 0) {
-					System.out.println(byteToString((byte)bin.read()));
+//					System.out.println(byteToString((byte)bin.read()));
 				}
 			}
 
@@ -51,6 +51,8 @@ public class BufferedStreamTest {
 			int n1 = bin.read(b, 0, b.length);
 			System.out.println("剩余的有效字节数 ： " + n1);
 			printByteValue(b);
+
+			System.out.println();
 
 			bin.reset();
 			int n2 = bin.read(b,0, b.length);
