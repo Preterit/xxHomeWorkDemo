@@ -16,6 +16,7 @@
         <activity android:name="com.xiangxue.rx.rx_activity.GetCodeActivity" />
         <activity android:name="com.xiangxue.rx.rx_activity.RetrofitLoginActivity" />
         <activity android:name="com.xiangxue.rx.rx_activity.RetrofitTestActivity" />
+        <activity android:name="com.xiangxue.viewpager2.ViewPager2DemoActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

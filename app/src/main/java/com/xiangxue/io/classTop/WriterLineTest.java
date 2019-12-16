@@ -114,8 +114,7 @@ public class WriterLineTest {
                 bos.write(bytes);
             }
             bis.close();
-            bos.flush();
-            bos.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

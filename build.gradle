@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.3.61'
     repositories {
         google()
         jcenter()
@@ -8,6 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -18,6 +20,16 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://oss.jfrog.org/libs-snapshot' }
+        maven { url 'https://jitpack.io' }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+
+        maven {
+            url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+        }
     }
 }
 
@@ -30,4 +42,69 @@ project.ext {
     retrofitVersion = "2.4.0"
     gsonVersion = "2.8.2"
     cookieVersion = "v1.0.1"
+}
+
+ext {
+
+    navigationVersion = "2.0.0"
+    kotlin_version = '1.3.41'
+    compileSdkVersion = 28
+    minSdkVersion = 21
+    targetSdkVersion = 28
+
+    versionCode = 30003
+    versionName = "3.0.3"
+
+
+    //ui
+    appcompat = "1.1.0"
+    recyclerview = "1.0.0"
+    cardview = "1.0.0"
+    legacy = "1.0.0"
+    annotation = "1.0.0"
+    corektx = "1.1.0"
+    constraintlayout = "1.1.3"
+    material = "1.0.0"
+    butterknife = "10.2.0"
+
+    coroutines = "1.3.2"
+
+    supportv4 = "27.1.1"
+
+    WheelPicker = "1.5.0"
+    calendarview = "1.4.3"
+    easypermissions = "1.0.0"
+
+    circleimageview = "2.2.0"
+
+    BaseRecyclerViewAdapterHelper = "2.9.46"
+
+    SmartRefreshLayout = "1.0.5.1"
+
+
+    picture_library = "v2.1.7"
+    waveview = "1.0.0"
+    indicatorseekbar = "2.1.0"
+    stickyheadersrecyclerview = "0.4.3"
+
+
+
+    //biz 业务相关的
+    eventbus = "3.1.1"
+    multidex = "1.0.3"
+    alicloud_push = "3.1.2"
+    alicloud_third_push = "3.0.5@aar"
+    umsdk_analytics = "7.5.4"
+    umsdk_common = "1.5.4"
+    align_text_view = "2.3.2"
+
+    wechat_sdk_android_with_mta = "5.3.1"
+
+    //net
+    retrofit = "2.3.0"
+    interceptor = "3.4.1"
+
+    glide = "4.0.0"
+    rxpermissions = "0.10.2"
+
 }

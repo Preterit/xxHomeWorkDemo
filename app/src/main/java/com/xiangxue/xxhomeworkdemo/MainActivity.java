@@ -6,24 +6,26 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.xiangxue.annotation.activity.AnnotationActivity;
-import com.xiangxue.dagger2.Dagger2Activity;
 import com.xiangxue.rx.rx_activity.FilterActivity;
 import com.xiangxue.rx.rx_activity.GetCodeActivity;
 import com.xiangxue.rx.rx_activity.OtherActivity;
 import com.xiangxue.rx.rx_activity.RetrofitLoginActivity;
 import com.xiangxue.rx.rx_activity.RetrofitTestActivity;
+import com.xiangxue.viewpager2.ViewPager2DemoActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     //字符串组合
-    private String[] data = {"retrofit网络测试",
+    private String[] data = {
+            "retrofit网络测试",
             "注册/登录",
             "GetCodeActivity",
             "FilterActivity",
             "OtherActivity",
-            "dagger2"
+            "dagger2",
+            "ViewPager2Demo"
     };
     private ArrayAdapter<String> adapter;
 
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, AnnotationActivity.class));
                     break;
                 case 6:
-                    startActivity(new Intent(MainActivity.this, Dagger2Activity.class));
+                    startActivity(new Intent(MainActivity.this, ViewPager2DemoActivity.class));
                     break;
                 default:
                     break;

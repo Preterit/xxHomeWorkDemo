@@ -53,8 +53,8 @@ public class RandomAccessFileTests {
 
 		printFileLength(rsfWriter);	//result:  10026
 
-		//再从“文件指针”为1000的地方插入一个长度为100、内容全是a的字节数组
-		//这里file长依然是10026、因为他是从“文件指针”为5000的地方覆盖后面
+		//再字节数组
+		//这里file长依然是10026、因为他是从“文件指针”为5000的地方从“文件指针”为1000的地方插入一个长度为100、内容全是a的覆盖后面
 		//的200个字节、下标并没有超过文件长度
 		byte[] bbuf = new byte[100];
 		for (int i = 0; i < bbuf.length; i++) {
